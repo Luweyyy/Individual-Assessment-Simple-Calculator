@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #000000;
+      
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: rgb(255, 153, 0);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin-top: 0;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 100px;
+      border-radius: 5px;
+    }
+
+    select {
+      padding: 8px;
+      margin: 10px;
+      width: 130px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #000000;
+      color: rgb(255, 255, 255);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    h2 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+  <title>Simple Calculator</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Simple Calculator</h1>
+    <input type="text" id="number1" placeholder="Enter a number">
+    <select id="operation">
+      <option value="add">Addition</option>
+      <option value="subtract">Subtraction</option>
+      <option value="multiply">Multiplication</option>
+      <option value="divide">Division</option>
+      <option value="modulus">Modulus</option>
+      <option value="exponent">Exponentiation</option>
+    </select>
+    <input type="text" id="number2" placeholder="Enter a number">
+
+    <button id="calculate">Calculate</button>
+    <h2 id="result">Result: </h2>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+<script>
+  const number1Input = document.getElementById('number1');
+  const number2Input = document.getElementById('number2');
+  const operationSelect = document.getElementById('operation');
+  const calculateButton = document.getElementById('calculate');
+  const resultH2 = document.getElementById('result');
+
+  calculateButton.addEventListener('click', () => {
+    const num1 = parseFloat(number1Input.value);
+    const num2 = parseFloat(number2Input.value);
+    const selectedOperation = operationSelect.value;
+
+    if (isNaN(num1) || isNaN(num2)) {
+      resultH2.textContent = 'Result: Invalid input';
+      return;
+    }
+
+    let result = 0;
+
+    switch (selectedOperation) {
+      case 'add':
+        result = num1 + num2;
+        break;
+      case 'subtract':
+        result = num1 - num2;
+        break;
+      case 'multiply':
+        result = num1 * num2;
+        break;
+      case 'divide':
+        if (num2 !== 0) {
+          result = num1 / num2;
+        } else {
+          resultH2.textContent = 'Result: Division by zero';
+          return;
+        }
+        break;
+      case 'modulus':
+        result = num1 % num2;
+        break;
+      case 'exponent':
+        result = Math.pow(num1, num2);
+        break;
+      default:
+        break;
+    }
+
+    resultH2.textContent = `Result: ${result}`;
+  });
+
+</script>
+
+</html>
